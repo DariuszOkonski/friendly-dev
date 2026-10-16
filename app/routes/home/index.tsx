@@ -8,5 +8,5 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  return <>My App Index.tsx</>;
+  return <section>My App Index.tsx</section>;
 }
