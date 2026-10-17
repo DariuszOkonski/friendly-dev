@@ -1,7 +1,10 @@
-import { FaLaptopCode } from "react-icons/fa";
+import { useState } from "react";
+import { FaLaptopCode, FaTimes, FaBars } from "react-icons/fa";
 import { NavLink } from "react-router";
 
 const Navbar = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   const base = "transition hover:text-blue-400";
   const active = "text-blue-400 font-semibold";
 
@@ -11,6 +14,7 @@ const Navbar = () => {
         <NavLink
           to="/"
           className="flex items-center gap-2 text-lg font-bold text-blue-300"
+          onClick={() => setMenuOpen(false)}
         >
           <FaLaptopCode className="text-blue-400 text-xl" />
           <span>The Friendly Developer</span>
@@ -51,7 +55,59 @@ const Navbar = () => {
             </NavLink>
           </div>
         </div>
+
+        {/* Hamburger */}
+        <div className="flex items-center gap-4 md:hidden">
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="text-blue-400 text-xl cursor-pointer"
+            title="Menu"
+          >
+            {menuOpen ? <FaTimes /> : <FaBars />}
+          </button>
+        </div>
       </div>
+
+      {/* Mobile Nav */}
+      {menuOpen && (
+        <div className="md:hidden bg-gray-800 border-t border-gray-700 px-6 py-4 space-y-2 space-x-4 text-center">
+          <NavLink
+            className={({ isActive }) => (isActive ? active : base)}
+            to="/"
+            onClick={() => setMenuOpen(false)}
+          >
+            Home
+          </NavLink>
+          <NavLink
+            className={({ isActive }) => (isActive ? active : base)}
+            to="/projects"
+            onClick={() => setMenuOpen(false)}
+          >
+            Projects
+          </NavLink>
+          <NavLink
+            className={({ isActive }) => (isActive ? active : base)}
+            to="/blog"
+            onClick={() => setMenuOpen(false)}
+          >
+            Blog
+          </NavLink>
+          <NavLink
+            className={({ isActive }) => (isActive ? active : base)}
+            to="/about"
+            onClick={() => setMenuOpen(false)}
+          >
+            About
+          </NavLink>
+          <NavLink
+            className={({ isActive }) => (isActive ? active : base)}
+            to="/contact"
+            onClick={() => setMenuOpen(false)}
+          >
+            Contact
+          </NavLink>
+        </div>
+      )}
     </nav>
   );
 };
