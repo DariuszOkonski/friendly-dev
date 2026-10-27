@@ -1,4 +1,5 @@
 // import Hero from "~/components/Hero";
+import FeaturedProjects from "~/components/FeaturedProjects";
 import type { Route } from "./+types/index";
 
 export function meta({}: Route.MetaArgs) {
@@ -9,5 +10,9 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  return <>Home Page</>;
+  return (
+    <>
+      <FeaturedProjects />
+    </>
+  );
 }
