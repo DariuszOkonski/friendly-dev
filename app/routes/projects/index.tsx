@@ -3,6 +3,7 @@ import type { Route } from "./+types/index";
 import type { Project } from "~/types";
 import { useState } from "react";
 import Pagination from "~/components/Pagination";
+import { AnimatePresence, motion } from "framer-motion";
 
 export async function loader({ request }: Route.LoaderArgs): Promise<{
   projects: Project[];
@@ -11,6 +12,13 @@ export async function loader({ request }: Route.LoaderArgs): Promise<{
   const data = await res.json();
 
   return { projects: data };
+}
+
+export function meta({}: Route.MetaArgs) {
+  return [
+    { title: "The Friendly Dev | Projects" },
+    { name: "description", content: "My website project portfolio" },
+  ];
 }
 
 const ProjectsPage = ({ loaderData }: Route.ComponentProps) => {
@@ -58,11 +66,15 @@ const ProjectsPage = ({ loaderData }: Route.ComponentProps) => {
         ))}
       </div>
 
-      <div className="grid gap-6 sm:grid-cols-2">
-        {currentProjects.map((project) => (
-          <ProjectCard key={project.id} project={project} />
-        ))}
-      </div>
+      <AnimatePresence mode="wait">
+        <motion.div layout className="grid gap-6 sm:grid-cols-2">
+          {currentProjects.map((project) => (
+            <motion.div key={project.id} layout>
+              <ProjectCard key={project.id} project={project} />
+            </motion.div>
+          ))}
+        </motion.div>
+      </AnimatePresence>
 
       <Pagination
         totalPages={totalPages}
