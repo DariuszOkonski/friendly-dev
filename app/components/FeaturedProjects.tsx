@@ -10,8 +10,6 @@ type FeaturedProjectsProps = {
 const FeaturedProjects = ({ projects, count = 4 }: FeaturedProjectsProps) => {
   const featured = projects.filter((p) => p.featured).slice(0, count);
 
-  console.log(featured);
-
   return (
     <section>
       <h2 className="text-2xl font-bold mb-6 text-gray-200">
