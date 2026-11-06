@@ -17,6 +17,10 @@ export async function loader({
 
   const data = await res.json();
 
+  data.sort((a: PostMeta, b: PostMeta) => {
+    return new Date(a.date).getTime() - new Date(b.date).getTime();
+  });
+
   return {
     posts: data,
   };
